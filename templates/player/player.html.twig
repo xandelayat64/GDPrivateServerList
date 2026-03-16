@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Players{% endblock %}
+
+{% block body %}
+    <h1><br>Players list
+        <br>
+        <br>
+    </h1>
+    {% if player %}
+        <div class="flex m-center container">
+            <main class="main1">
+                {% for item in player %}
+                    <section class="panel fade closable">
+                        <a class="thumb ratio-16-9 js-delay-css" href="https://youtu.be/twTw4fjT0ik?si=dpXrjzKQbfoeVfw4" style="position: relative; height: 145.125px; background-image: url('https://i.ytimg.com/vi/CELNmHwln_c/mqdefault.jpg');" data-property="background-image" data-property-value="url('https://i.ytimg.com/vi/CELNmHwln_c/mqdefault.jpg')"></a>
+                        <div class="flex demon-info" style="align-items: center">
+                            <div class="demon-byline">
+                                <h2 style="text-align: left; margin-bottom: 0px">
+                                    <a href="{{ path('player', {'id': item.id}) }}" style="color: orange;"> {{ item.position }} - {{ item.name }}</a>
+                                </h2>
+                                <h3 style="text-align: left;">
+                                    Points:
+                                    <a class="underdotted" target="_blank"> {{ item.points }}</a>
+                                    <a href="/player/edit/{{ item.id }}" class="btn btn-warning" style="margin-left: 830px; background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0)); outline: none;">Update</a>
+                                    <form method="post" action="{{ path('player_delete', {id: item.id}) }}"
+                                          style="display: inline-block" onsubmit="return confirm('Do you really want to remove this player: {{ item.name }} ?')">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                        <button class="btn btn-danger" style="margin-left: 770px; position: relative; top: -45px; margin-bottom: -30px;">Remove</button>
+                                    </form>
+                                </h3>
+                            </div>
+                        </div>
+                    </section>
+                    <h1> </h1>
+                {% endfor %}
+            </main>
+        </div>
+    {% else %}
+        <p>Error: No players on the list</p>
+    {% endif %}
+
+    <style>
+        h1 {
+            margin-left: 10px;
+            color: #ffffff;
+        }
+        .panel h2,
+        .panel h3,
+        .panel div {
+            color: white;
+        }
+        .panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        h3 {
+            font-size: 125%;
+            font-style: italic;
+        }
+        .flex {
+            outline: white;
+        }
+        .panel.fade.closable {
+            opacity: 1;
+            display: block;
+            visibility: visible;
+        }
+    </style>
+
+{% endblock %}
