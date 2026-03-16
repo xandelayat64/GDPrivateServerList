@@ -1,0 +1,50 @@
+/* Main navbar */
+
+.navbar {
+    background: linear-gradient(to right, #000000, rgba(63, 63, 63, 0.79));
+}
+
+.navbar-brand {
+    color: #FFFFFF;
+}
+
+/* For "2nd navbar" */
+
+.subtle_under {
+    color: #ff3e03;
+    opacity: 0;
+}
+
+.nav2 {
+    height: 5px;
+    background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0));
+}
+
+.navbar-toggler1 {
+    display: none;
+    background: transparent;
+    border: 2px solid #ff3e03;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.navbar-toggle-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0));
+    position: relative;
+}
+.navbar-toggle-icon::before,
+.navbar-toggle-icon::after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0));
+    position: absolute;
+    left: 0;
+}
+.navbar-toggle-icon::before {
+    top: -8px;
+}

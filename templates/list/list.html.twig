@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demonlist{% endblock %}
+
+{% block body %}
+    <h1><br>The List<br><br></h1>
+
+    {% if list %}
+        <div class="flex m-center container">
+            <main class="main1">
+                {% for item in list|slice(0, 150) %}
+                    <section class="panel fade closable">
+                        <a class="thumb ratio-16-9 js-delay-css"
+                           href="https://youtu.be/twTw4fjT0ik?si=dpXrjzKQbfoeVfw4"
+                           style="position: relative; height: 145.125px; background-image: url('https://i.ytimg.com/vi/CELNmHwln_c/mqdefault.jpg');"
+                           data-property="background-image"
+                           data-property-value="url('https://i.ytimg.com/vi/CELNmHwln_c/mqdefault.jpg')">
+                        </a>
+
+                        <div class="flex demon-info" style="align-items: center">
+                            <div class="demon-byline">
+                                <h2 style="text-align: left; margin-bottom: 0px">
+                                    <a>#{{ item.place }} - {{ item.name }}</a>
+                                </h2>
+                                <h3 style="text-align: left; margin-bottom: 15px;">
+                                    Uploaded by
+                                    <a class="underdotted" target="_blank">{{ item.creator }}</a>
+                                </h3>
+
+                                <div class="level-info">
+                                    <span class="points-badge">{{ item.points }} points</span>
+                                    <div class="action-buttons">
+                                        <a href="/list/edit/{{ item.id }}" class="btn btn-update">
+                                            Update
+                                        </a>
+                                        <form method="post"
+                                              action="{{ path('list_delete', {id: item.id}) }}"
+                                              style="display: inline-block"
+                                              onsubmit="return confirm('Do you really want to remove this level: {{ item.name }}?')">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                            <button class="btn btn-remove">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="spacer"></div>
+                {% endfor %}
+            </main>
+        </div>
+    {% else %}
+        <p class="error-message">Error: No levels currently placed on the list</p>
+    {% endif %}
+
+    <style>
+        h1 {
+            margin-left: 10px;
+            color: #ffffff;
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .panel h2,
+        .panel h3,
+        .panel div {
+            color: white;
+        }
+
+        .panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            min-height: 200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 62, 3, 0.3);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .flex {
+            outline: white;
+        }
+
+        .panel.fade.closable {
+            opacity: 1;
+            display: block;
+            visibility: visible;
+        }
+
+        .spacer {
+            height: 20px;
+        }
+
+        .level-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .points-badge {
+            padding: 10px 18px;
+            color: white !important;
+            background: linear-gradient(135deg, rgba(255, 62, 3, 0.3), rgba(255, 210, 0, 0.3));
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 62, 3, 0.5);
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(255, 62, 3, 0.2);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-update {
+            background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0));
+            color: white;
+        }
+
+        .btn-update:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 62, 3, 0.4);
+        }
+
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-remove:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .error-message {
+            text-align: center;
+            color: #ff3e03;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .level-info {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .action-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .points-badge {
+                font-size: 0.9rem;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+
+{% endblock %}

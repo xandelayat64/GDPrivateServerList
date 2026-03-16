@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="{{ asset('css/headerstyle.css') }}">
+
+<nav class="navbar">
+    <div class="container">
+        <a href="/" class="navbar-brand">GDPS Demonlist</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav" style="background: linear-gradient(to right, #ff3e03, rgb(255, 210, 0)); min-height: 20px; min-width: 40px; scale: 1.1;">
+            <a style="color: white;">More</a>
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mobile-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="{{ path('home') }}" class="nav-link" style="color: orange;">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: orange;">Demonlist</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                        <a href="{{ path('list') }}" class="dropdown-item">Demonlist</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ path('list_new') }}" class="dropdown-item">Add a level</a>
+                    </div>
+                </li>
+                <!--<li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: orange;">Players</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                        <a href="{{ path('player') }}" class="dropdown-item">Players list</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ path('player_new') }}" class="dropdown-item">Add a player</a>
+                    </div>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    span {
+        opacity: 0;
+    }
+</style>
+
+{# Including a second navbar line for aesthetic purposes #}
+<nav class="nav2">
+    <div class="container">
+        <p class="subtle-under">_</p>
+    </div>
+</nav>
